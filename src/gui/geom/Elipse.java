@@ -8,9 +8,7 @@ import java.awt.Graphics;
 public class Elipse extends Forma {
     
     @Override
-    public void desenhar( Graphics g ){
-        g.setColor( corDoContorno );
-        
+    public void desenhar( Graphics g ){        
         int iniXD = iniX < fimX ? iniX : fimX;
         int fimXD = iniX > fimX ? iniX : fimX;
         int iniYD = iniY < fimY ? iniY : fimY;
@@ -18,8 +16,13 @@ public class Elipse extends Forma {
         
         int largura = fimXD - iniXD;
         int altura = fimYD - iniYD;
-    
-        g.drawOval(iniXD, iniYD, largura, altura );
+        
+        g.setColor( corPreenchimento );
+        g.fillOval( iniXD, iniYD, largura, altura );   
+        
+        g.setColor( corDoContorno );
+        g.drawOval( iniXD, iniYD, largura, altura );
+        
     }
     
 }
