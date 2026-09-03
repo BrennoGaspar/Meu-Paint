@@ -15,7 +15,6 @@ public class PainelDesenho extends JPanel {
 
     // Atributos
     private ResizingArrayStack pilha;
-    private janelaPrincipal jp;
 
     // Construtor
     public PainelDesenho(){}

@@ -31,6 +31,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private int quantidadeLados;
     private List<Ponto> caminho;
     private ResizingArrayStack pilha;
+    private ResizingArrayStack pilhaRedo;
     
     /**
      * Creates new form janelaPrincipal
@@ -39,12 +40,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
         initComponents();
         quantidadeLados = 3;
         pilha = new ResizingArrayStack();
+        pilhaRedo = new ResizingArrayStack();
         painelDesenho.setPilha( pilha );
-    }
-
-    // Método Getter da pilha
-    public ResizingArrayStack getPilha() {
-        return pilha;
     }
 
     /**
@@ -59,6 +56,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         btnGroupFerramentas = new javax.swing.ButtonGroup();
         painelDesenho = new ui.PainelDesenho();
         undo = new javax.swing.JButton();
+        redo = new javax.swing.JButton();
         painelFerramentas = new javax.swing.JPanel();
         btnLinha = new javax.swing.JToggleButton();
         btnCaneta = new javax.swing.JToggleButton();
@@ -93,6 +91,13 @@ public class janelaPrincipal extends javax.swing.JFrame {
         });
         undo.addActionListener(this::undoActionPerformed);
 
+        redo.setText("redo");
+        redo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                redoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelDesenhoLayout = new javax.swing.GroupLayout(painelDesenho);
         painelDesenho.setLayout(painelDesenhoLayout);
         painelDesenhoLayout.setHorizontalGroup(
@@ -100,13 +105,17 @@ public class janelaPrincipal extends javax.swing.JFrame {
             .addGroup(painelDesenhoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(undo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(redo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelDesenhoLayout.setVerticalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDesenhoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(undo)
+                .addGroup(painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(undo)
+                    .addComponent(redo))
                 .addContainerGap(255, Short.MAX_VALUE))
         );
 
@@ -319,9 +328,16 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_undoActionPerformed
 
     private void undoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoMouseClicked
-        pilha.pop();
+        Forma t = (Forma) pilha.pop();
+        pilhaRedo.push( t );
         painelDesenho.repaint();
     }//GEN-LAST:event_undoMouseClicked
+
+    private void redoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redoMouseClicked
+        Forma t = (Forma) pilhaRedo.pop();
+        pilha.push( t );
+        painelDesenho.repaint();
+    }//GEN-LAST:event_redoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -359,6 +375,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painelCorPreenchimento;
     private ui.PainelDesenho painelDesenho;
     private javax.swing.JPanel painelFerramentas;
+    private javax.swing.JButton redo;
     private javax.swing.JButton undo;
     // End of variables declaration//GEN-END:variables
 }
