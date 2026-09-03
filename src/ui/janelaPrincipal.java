@@ -328,15 +328,19 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_undoActionPerformed
 
     private void undoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoMouseClicked
-        Forma t = (Forma) pilha.pop();
-        pilhaRedo.push( t );
-        painelDesenho.repaint();
+        if( !pilha.isEmpty() ) {
+            Forma t = (Forma) pilha.pop();
+            pilhaRedo.push( t );
+            painelDesenho.repaint();
+        }
     }//GEN-LAST:event_undoMouseClicked
 
     private void redoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redoMouseClicked
-        Forma t = (Forma) pilhaRedo.pop();
-        pilha.push( t );
-        painelDesenho.repaint();
+        if( !pilhaRedo.isEmpty() ) {
+            Forma t = (Forma) pilhaRedo.pop();
+            pilha.push( t );
+            painelDesenho.repaint();
+        }
     }//GEN-LAST:event_redoMouseClicked
 
     /**
