@@ -1,12 +1,12 @@
 package ui;
 
 import desenhos.Forma;
-import desenhos.Linha;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import stack.ResizingArrayStack;
 
 /**
  * @author Brenno Gaspar Pinto
@@ -14,11 +14,15 @@ import javax.swing.JPanel;
 public class PainelDesenho extends JPanel {
 
     // Atributos
-    private List<Forma> formas;
+    private ResizingArrayStack pilha;
+    private janelaPrincipal jp;
 
     // Construtor
-    public PainelDesenho() {
-        formas = new ArrayList<>();
+    public PainelDesenho(){}
+
+    public void setPilha( ResizingArrayStack pilha ) {
+        this.pilha = pilha;
+        repaint();
     }
     
     // Função desenhar
@@ -31,15 +35,16 @@ public class PainelDesenho extends JPanel {
         g.setColor( Color.WHITE );
         g.fillRect( 0, 0, getWidth(), getHeight() );
         
+        if( pilha == null ) {
+            return;
+        }
+        
         // cor do desenho
-        for( Forma forma : formas ){
+        for( int i = 0; i < pilha.getSize(); i++ ){
+            Forma forma = (Forma) pilha.get( i );
             forma.desenhar( g );
         }
         
-    }
-    
-    public void adicionarForma( Forma forma ){
-        formas.add( forma );
     }
     
 }

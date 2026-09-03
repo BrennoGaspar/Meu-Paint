@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import stack.ResizingArrayStack;
 
 /**
  *
@@ -29,6 +30,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private Forma novaForma;
     private int quantidadeLados;
     private List<Ponto> caminho;
+    private ResizingArrayStack pilha;
     
     /**
      * Creates new form janelaPrincipal
@@ -36,6 +38,13 @@ public class janelaPrincipal extends javax.swing.JFrame {
     public janelaPrincipal() {
         initComponents();
         quantidadeLados = 3;
+        pilha = new ResizingArrayStack();
+        painelDesenho.setPilha( pilha );
+    }
+
+    // Método Getter da pilha
+    public ResizingArrayStack getPilha() {
+        return pilha;
     }
 
     /**
@@ -49,6 +58,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
 
         btnGroupFerramentas = new javax.swing.ButtonGroup();
         painelDesenho = new ui.PainelDesenho();
+        undo = new javax.swing.JButton();
         painelFerramentas = new javax.swing.JPanel();
         btnLinha = new javax.swing.JToggleButton();
         btnCaneta = new javax.swing.JToggleButton();
@@ -75,52 +85,66 @@ public class janelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        undo.setText("undo");
+        undo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                undoMouseClicked(evt);
+            }
+        });
+        undo.addActionListener(this::undoActionPerformed);
+
         javax.swing.GroupLayout painelDesenhoLayout = new javax.swing.GroupLayout(painelDesenho);
         painelDesenho.setLayout(painelDesenhoLayout);
         painelDesenhoLayout.setHorizontalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(painelDesenhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(undo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelDesenhoLayout.setVerticalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 284, Short.MAX_VALUE)
+            .addGroup(painelDesenhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(undo)
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         btnGroupFerramentas.add(btnLinha);
         btnLinha.setSelected(true);
         btnLinha.setText("Linha");
-        btnLinha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLinha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLinha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLinha.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnGroupFerramentas.add(btnCaneta);
         btnCaneta.setText("Caneta");
-        btnCaneta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCaneta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCaneta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCaneta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnGroupFerramentas.add(btnPoligono);
         btnPoligono.setText("Poligono");
-        btnPoligono.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPoligono.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPoligono.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPoligono.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnPoligono.addActionListener(this::btnPoligonoActionPerformed);
 
         btnGroupFerramentas.add(btnRetangulo);
         btnRetangulo.setText("Retangulo");
-        btnRetangulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRetangulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRetangulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRetangulo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnGroupFerramentas.add(btnElipse);
         btnElipse.setText("Elipse");
-        btnElipse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnElipse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnElipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnElipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         painelCorPreenchimento.setBackground(new java.awt.Color(255, 255, 255));
         painelCorPreenchimento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        painelCorPreenchimento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        painelCorPreenchimento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         painelCorPreenchimento.setPreferredSize(new java.awt.Dimension(20, 20));
         painelCorPreenchimento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -141,7 +165,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
 
         painelCorContorno.setBackground(new java.awt.Color(0, 0, 0));
         painelCorContorno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        painelCorContorno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        painelCorContorno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         painelCorContorno.setPreferredSize(new java.awt.Dimension(20, 20));
         painelCorContorno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -167,9 +191,13 @@ public class janelaPrincipal extends javax.swing.JFrame {
             .addGroup(painelFerramentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLinha)
+                .addGap(0, 0, 0)
                 .addComponent(btnRetangulo)
+                .addGap(0, 0, 0)
                 .addComponent(btnElipse)
+                .addGap(0, 0, 0)
                 .addComponent(btnPoligono)
+                .addGap(0, 0, 0)
                 .addComponent(btnCaneta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,7 +263,6 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimY( evt.getY() );
         novaForma.setCorDoContorno( painelCorContorno.getBackground() );
         novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
-        painelDesenho.adicionarForma( novaForma );
     }//GEN-LAST:event_painelDesenhoMousePressed
 
     private void painelDesenhoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseReleased
@@ -246,6 +273,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         }
         novaForma.setFimX( evt.getX() );
         novaForma.setFimY( evt.getY() );
+        pilha.push( novaForma );
         painelDesenho.repaint();
     }//GEN-LAST:event_painelDesenhoMouseReleased
 
@@ -286,6 +314,15 @@ public class janelaPrincipal extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnPoligonoActionPerformed
 
+    private void undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoActionPerformed
+        
+    }//GEN-LAST:event_undoActionPerformed
+
+    private void undoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoMouseClicked
+        pilha.pop();
+        painelDesenho.repaint();
+    }//GEN-LAST:event_undoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -322,5 +359,6 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painelCorPreenchimento;
     private ui.PainelDesenho painelDesenho;
     private javax.swing.JPanel painelFerramentas;
+    private javax.swing.JButton undo;
     // End of variables declaration//GEN-END:variables
 }

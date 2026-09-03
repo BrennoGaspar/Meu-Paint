@@ -72,4 +72,8 @@ public class ResizingArrayStack<Forma> implements Stack<Forma> {
         return size;
     }
     
+    public Forma get( int i ) {
+        return values[i];
+    }
+    
 }
