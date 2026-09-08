@@ -12,10 +12,17 @@ import desenhos.Poligono;
 import desenhos.Ponto;
 import desenhos.Retangulo;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import stack.ResizingArrayStack;
 
 /**
@@ -42,8 +49,55 @@ public class janelaPrincipal extends javax.swing.JFrame {
         pilha = new ResizingArrayStack();
         pilhaRedo = new ResizingArrayStack();
         painelDesenho.setPilha( pilha );
+        
+        configurarCtrlZ();
+        configurarCtrlY();
     }
 
+    // Função para a pilha undo (desfazer)
+    private void undo (){
+        if( !pilha.isEmpty() ) {
+            Forma t = (Forma) pilha.pop();
+            pilhaRedo.push( t );
+            painelDesenho.repaint();
+        }
+    }
+    
+    // Função para a pilha redo (refazer)
+    private void redo (){
+        if( !pilhaRedo.isEmpty() ) {
+            Forma t = (Forma) pilhaRedo.pop();
+            pilha.push( t );
+            painelDesenho.repaint();
+        }
+    }
+    
+    private void configurarCtrlZ() {
+        KeyStroke ctrlZ = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK); // combinar ctrl + z
+        
+        Action undoAction = new AbstractAction() {
+            public void actionPerformed( ActionEvent e ) {
+                undo();
+            }
+        };
+        
+        painelDesenho.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( ctrlZ, "desfazer" );
+        painelDesenho.getActionMap().put( "desfazer", undoAction );
+    }
+    
+    private void configurarCtrlY() {
+        KeyStroke ctrlY = KeyStroke.getKeyStroke( KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK );
+        
+        Action redoAction = new AbstractAction() {
+            public void actionPerformed( ActionEvent e ) {
+                redo();
+            }
+        };
+        
+        painelDesenho.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( ctrlY, "refazer" );
+        painelDesenho.getActionMap().put( "refazer", redoAction );
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -272,6 +326,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimY( evt.getY() );
         novaForma.setCorDoContorno( painelCorContorno.getBackground() );
         novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
+        painelDesenho.repaint();
     }//GEN-LAST:event_painelDesenhoMousePressed
 
     private void painelDesenhoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseReleased
@@ -328,19 +383,11 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_undoActionPerformed
 
     private void undoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoMouseClicked
-        if( !pilha.isEmpty() ) {
-            Forma t = (Forma) pilha.pop();
-            pilhaRedo.push( t );
-            painelDesenho.repaint();
-        }
+        undo();
     }//GEN-LAST:event_undoMouseClicked
 
     private void redoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redoMouseClicked
-        if( !pilhaRedo.isEmpty() ) {
-            Forma t = (Forma) pilhaRedo.pop();
-            pilha.push( t );
-            painelDesenho.repaint();
-        }
+        redo();
     }//GEN-LAST:event_redoMouseClicked
 
     /**

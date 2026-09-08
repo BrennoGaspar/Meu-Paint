@@ -16,9 +16,6 @@ public class PainelDesenho extends JPanel {
     // Atributos
     private ResizingArrayStack pilha;
 
-    // Construtor
-    public PainelDesenho(){}
-
     public void setPilha( ResizingArrayStack pilha ) {
         this.pilha = pilha;
         repaint();
@@ -33,10 +30,6 @@ public class PainelDesenho extends JPanel {
         // cor da tela
         g.setColor( Color.WHITE );
         g.fillRect( 0, 0, getWidth(), getHeight() );
-        
-        if( pilha == null ) {
-            return;
-        }
         
         // cor do desenho
         for( int i = 0; i < pilha.getSize(); i++ ){
