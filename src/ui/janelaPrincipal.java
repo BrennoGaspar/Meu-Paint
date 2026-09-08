@@ -72,6 +72,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         }
     }
     
+    // Funções para configurar o CtrlZ e CtrlY na tela
     private void configurarCtrlZ() {
         KeyStroke ctrlZ = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK); // combinar ctrl + z
         
@@ -372,9 +373,11 @@ public class janelaPrincipal extends javax.swing.JFrame {
             int quantidade = Integer.parseInt( valor );
             if( quantidade >= 3 ) {
                 quantidadeLados = quantidade;
+            } else {
+                JOptionPane.showMessageDialog( this, "Por favor, insira um número maior que 2", "AVISO", JOptionPane.WARNING_MESSAGE );
             }
         } catch ( NumberFormatException exc ) {
-            // erro
+            JOptionPane.showMessageDialog( this, "Por favor, insira um número válido", "ERRO", JOptionPane.ERROR_MESSAGE );
         }        
     }//GEN-LAST:event_btnPoligonoActionPerformed
 

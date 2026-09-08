@@ -3,8 +3,6 @@ package ui;
 import desenhos.Forma;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JPanel;
 import stack.ResizingArrayStack;
 
