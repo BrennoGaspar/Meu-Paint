@@ -13,10 +13,15 @@ public class PainelDesenho extends JPanel {
 
     // Atributos
     private ResizingArrayStack pilha;
+    private Forma emConstrucao;
 
     public void setPilha( ResizingArrayStack pilha ) {
         this.pilha = pilha;
         repaint();
+    }
+    
+    public void setFormaEmConstrucao( Forma emConstrucao ) {
+        this.emConstrucao = emConstrucao;
     }
     
     // Função desenhar
@@ -33,6 +38,9 @@ public class PainelDesenho extends JPanel {
         for( int i = 0; i < pilha.getSize(); i++ ){
             Forma forma = (Forma) pilha.get( i );
             forma.desenhar( g );
+        }
+        if( emConstrucao != null ) {
+            emConstrucao.desenhar( g );
         }
         
     }

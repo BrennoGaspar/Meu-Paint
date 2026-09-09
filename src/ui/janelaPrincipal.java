@@ -39,6 +39,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private List<Ponto> caminho;
     private ResizingArrayStack pilha;
     private ResizingArrayStack pilhaRedo;
+    private Forma emConstrucao = null;
     
     /**
      * Creates new form janelaPrincipal
@@ -49,6 +50,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         pilha = new ResizingArrayStack();
         pilhaRedo = new ResizingArrayStack();
         painelDesenho.setPilha( pilha );
+        painelDesenho.setFormaEmConstrucao( emConstrucao );
         
         configurarCtrlZ();
         configurarCtrlY();
@@ -327,6 +329,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimY( evt.getY() );
         novaForma.setCorDoContorno( painelCorContorno.getBackground() );
         novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
+        emConstrucao = novaForma;
+        painelDesenho.setFormaEmConstrucao( emConstrucao );
         painelDesenho.repaint();
     }//GEN-LAST:event_painelDesenhoMousePressed
 
@@ -339,6 +343,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimX( evt.getX() );
         novaForma.setFimY( evt.getY() );
         pilha.push( novaForma );
+        emConstrucao = null;
+        painelDesenho.setFormaEmConstrucao( emConstrucao );
         painelDesenho.repaint();
     }//GEN-LAST:event_painelDesenhoMouseReleased
 
