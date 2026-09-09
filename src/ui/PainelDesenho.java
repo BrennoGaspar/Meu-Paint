@@ -16,8 +16,8 @@ public class PainelDesenho extends JPanel {
     private Forma emConstrucao;
 
     public void setPilha( ResizingArrayStack pilha ) {
-        this.pilha = pilha;
-        repaint();
+            this.pilha = pilha;
+            repaint();
     }
     
     public void setFormaEmConstrucao( Forma emConstrucao ) {
@@ -35,9 +35,11 @@ public class PainelDesenho extends JPanel {
         g.fillRect( 0, 0, getWidth(), getHeight() );
         
         // cor do desenho
-        for( int i = 0; i < pilha.getSize(); i++ ){
-            Forma forma = (Forma) pilha.get( i );
-            forma.desenhar( g );
+        if( pilha != null ) {
+            for( int i = 0; i < pilha.getSize(); i++ ){
+                Forma forma = (Forma) pilha.get( i );
+                forma.desenhar( g );
+            }
         }
         if( emConstrucao != null ) {
             emConstrucao.desenhar( g );

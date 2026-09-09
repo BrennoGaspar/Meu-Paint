@@ -4,6 +4,7 @@
  */
 package ui;
 
+import desenhos.Borracha;
 import desenhos.Caneta;
 import desenhos.Elipse;
 import desenhos.Forma;
@@ -115,6 +116,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         undo = new javax.swing.JButton();
         redo = new javax.swing.JButton();
         painelFerramentas = new javax.swing.JPanel();
+        btnBorracha = new javax.swing.JToggleButton();
         btnLinha = new javax.swing.JToggleButton();
         btnCaneta = new javax.swing.JToggleButton();
         btnPoligono = new javax.swing.JToggleButton();
@@ -173,8 +175,14 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addGroup(painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(undo)
                     .addComponent(redo))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
+
+        btnGroupFerramentas.add(btnBorracha);
+        btnBorracha.setText("Borracha");
+        btnBorracha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBorracha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBorracha.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         btnGroupFerramentas.add(btnLinha);
         btnLinha.setSelected(true);
@@ -266,8 +274,10 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btnCaneta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBorracha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -275,17 +285,16 @@ public class janelaPrincipal extends javax.swing.JFrame {
             painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFerramentasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnRetangulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnElipse, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPoligono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCaneta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRetangulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElipse, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPoligono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCaneta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBorracha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,8 +308,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(painelFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(painelDesenho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelDesenho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -316,8 +325,14 @@ public class janelaPrincipal extends javax.swing.JFrame {
             novaForma = new Elipse();
         } else if ( btnPoligono.isSelected() ) {
             novaForma = new Poligono( quantidadeLados );
-        } else {
+        } else if ( btnCaneta.isSelected() ) {
             novaForma = new Caneta();
+            Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
+            caminho = new ArrayList<>();
+            caminho.add(pontoInicial);
+            novaForma.setCaminho(caminho);
+        } else if ( btnBorracha.isSelected() ) {
+            novaForma = new Borracha();
             Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
             caminho = new ArrayList<>();
             caminho.add(pontoInicial);
@@ -335,7 +350,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_painelDesenhoMousePressed
 
     private void painelDesenhoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseReleased
-        if( novaForma instanceof Caneta ){
+        if( novaForma instanceof Caneta || novaForma instanceof Borracha ){
             Ponto pontoFinal = new Ponto( evt.getX(), evt.getY() );
             caminho.add(pontoFinal);
             novaForma.setCaminho(caminho);
@@ -349,7 +364,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_painelDesenhoMouseReleased
 
     private void painelDesenhoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseDragged
-        if( novaForma instanceof Caneta ){
+        if( novaForma instanceof Caneta || novaForma instanceof Borracha ){
             Ponto pontoAtual = new Ponto( evt.getX(), evt.getY() );
             caminho.add(pontoAtual);
             novaForma.setCaminho(caminho);
@@ -425,6 +440,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnBorracha;
     private javax.swing.JToggleButton btnCaneta;
     private javax.swing.JToggleButton btnElipse;
     private javax.swing.ButtonGroup btnGroupFerramentas;
