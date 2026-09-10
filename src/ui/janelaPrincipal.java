@@ -23,6 +23,7 @@ import javax.swing.Action;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JSlider;
 import javax.swing.KeyStroke;
 import stack.ResizingArrayStack;
 
@@ -41,6 +42,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private ResizingArrayStack pilha;
     private ResizingArrayStack pilhaRedo;
     private Forma emConstrucao = null;
+    private float grossuraPincel;
     
     /**
      * Creates new form janelaPrincipal
@@ -344,6 +346,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimY( evt.getY() );
         novaForma.setCorDoContorno( painelCorContorno.getBackground() );
         novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
+        grossuraPincel = painelDesenho.getGrossura();
+        novaForma.setGrossura( grossuraPincel );
         emConstrucao = novaForma;
         painelDesenho.setFormaEmConstrucao( emConstrucao );
         painelDesenho.repaint();

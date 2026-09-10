@@ -1,7 +1,8 @@
 package desenhos;
 
-import java.awt.Color;
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * @author Brenno Gaspar Pinto
@@ -37,11 +38,13 @@ public class Poligono extends Forma {
             anguloAtual += tamanhoAngulo;
         }
         
-        g.setColor( corPreenchimento );
-        g.fillPolygon( xs, ys, quantidadeLados );
-        
-        g.setColor( corDoContorno );
-        g.drawPolygon( xs, ys, quantidadeLados );
+        Graphics2D g2d = (Graphics2D) g;
+        BasicStroke traco = new BasicStroke( (float) getGrossura(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER );
+        g2d.setStroke( traco );
+        g2d.setColor( corPreenchimento );
+        g2d.fillPolygon( xs, ys, quantidadeLados );
+        g2d.setColor( corDoContorno );
+        g2d.drawPolygon( xs, ys, quantidadeLados );
         
     }
     

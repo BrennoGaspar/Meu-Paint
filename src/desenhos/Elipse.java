@@ -1,6 +1,8 @@
 package desenhos;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * @author Brenno Gaspar Pinto
@@ -17,11 +19,13 @@ public class Elipse extends Forma {
         int largura = fimXD - iniXD;
         int altura = fimYD - iniYD;
         
-        g.setColor( corPreenchimento );
-        g.fillOval( iniXD, iniYD, largura, altura );   
-        
-        g.setColor( corDoContorno );
-        g.drawOval( iniXD, iniYD, largura, altura );
+        Graphics2D g2d = (Graphics2D) g;
+        BasicStroke traco = new BasicStroke( (float) getGrossura(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER );
+        g2d.setStroke( traco );
+        g2d.setColor( corPreenchimento );
+        g2d.fillOval( iniXD, iniYD, largura, altura );
+        g2d.setColor( corDoContorno );
+        g2d.drawOval( iniXD, iniYD, largura, altura );
         
     }
     

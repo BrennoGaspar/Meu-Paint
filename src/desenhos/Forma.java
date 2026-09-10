@@ -17,6 +17,7 @@ public abstract class Forma {
     protected Color corDoContorno;
     protected Color corPreenchimento;
     protected List<Ponto> caminho;
+    protected float grossura;
 
     public abstract void desenhar( Graphics g );
     
@@ -48,6 +49,10 @@ public abstract class Forma {
     public List<Ponto> getCaminho() {
         return caminho;
     }
+
+    public float getGrossura() {
+        return grossura;
+    }
     
     // Setters
     public void setIniX(int iniX) {
@@ -76,6 +81,10 @@ public abstract class Forma {
 
     public void setCaminho(List<Ponto> caminho) {
         this.caminho = caminho;
+    }
+
+    public void setGrossura(float grossura) {
+        this.grossura = grossura;
     }
     
 }
