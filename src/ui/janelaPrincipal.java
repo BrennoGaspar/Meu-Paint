@@ -23,7 +23,6 @@ import javax.swing.Action;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JSlider;
 import javax.swing.KeyStroke;
 import stack.ResizingArrayStack;
 
@@ -43,6 +42,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private ResizingArrayStack pilhaRedo;
     private Forma emConstrucao = null;
     private float grossuraPincel;
+    private boolean preencherB = false;
     
     /**
      * Creates new form janelaPrincipal
@@ -126,6 +126,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         painelCorContorno = new javax.swing.JPanel();
         undo = new javax.swing.JButton();
         redo = new javax.swing.JButton();
+        preencher = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Meu Paint");
@@ -232,7 +233,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         );
         painelCorContornoLayout.setVerticalGroup(
             painelCorContornoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 18, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         undo.setText("↩️");
@@ -241,12 +242,18 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 undoMouseClicked(evt);
             }
         });
-        undo.addActionListener(this::undoActionPerformed);
 
         redo.setText("↪️");
         redo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 redoMouseClicked(evt);
+            }
+        });
+
+        preencher.setText("PREENCHER");
+        preencher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                preencherMouseClicked(evt);
             }
         });
 
@@ -268,10 +275,12 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorracha)
                 .addGap(18, 18, 18)
+                .addComponent(preencher)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,10 +299,10 @@ public class janelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBorracha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(painelCorContorno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(preencher))
+                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(painelCorContorno, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -343,7 +352,11 @@ public class janelaPrincipal extends javax.swing.JFrame {
         novaForma.setFimX( evt.getX() );
         novaForma.setFimY( evt.getY() );
         novaForma.setCorDoContorno( painelCorContorno.getBackground() );
-        novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
+        if( preencherB ) {
+            novaForma.setCorPreenchimento( painelCorPreenchimento.getBackground() );
+        } else {
+            novaForma.setCorPreenchimento( null );
+        }        
         grossuraPincel = painelDesenho.getGrossura();
         novaForma.setGrossura( grossuraPincel );
         emConstrucao = novaForma;
@@ -404,10 +417,6 @@ public class janelaPrincipal extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnPoligonoActionPerformed
 
-    private void undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoActionPerformed
-        
-    }//GEN-LAST:event_undoActionPerformed
-
     private void undoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoMouseClicked
         undo();
     }//GEN-LAST:event_undoMouseClicked
@@ -415,6 +424,10 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private void redoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redoMouseClicked
         redo();
     }//GEN-LAST:event_redoMouseClicked
+
+    private void preencherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preencherMouseClicked
+        preencherB = !preencherB;
+    }//GEN-LAST:event_preencherMouseClicked
 
     /**
      * @param args the command line arguments
@@ -453,6 +466,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painelCorPreenchimento;
     private ui.PainelDesenho painelDesenho;
     private javax.swing.JPanel painelFerramentas;
+    private javax.swing.JCheckBox preencher;
     private javax.swing.JButton redo;
     private javax.swing.JButton undo;
     // End of variables declaration//GEN-END:variables

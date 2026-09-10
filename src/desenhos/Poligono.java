@@ -41,8 +41,10 @@ public class Poligono extends Forma {
         Graphics2D g2d = (Graphics2D) g;
         BasicStroke traco = new BasicStroke( (float) getGrossura(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER );
         g2d.setStroke( traco );
-        g2d.setColor( corPreenchimento );
-        g2d.fillPolygon( xs, ys, quantidadeLados );
+        if( corPreenchimento != null ) {
+            g2d.setColor( corPreenchimento );
+            g2d.fillPolygon( xs, ys, quantidadeLados );
+        }
         g2d.setColor( corDoContorno );
         g2d.drawPolygon( xs, ys, quantidadeLados );
         

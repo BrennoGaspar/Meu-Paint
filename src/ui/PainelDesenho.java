@@ -22,12 +22,13 @@ public class PainelDesenho extends JPanel {
     private void criarSlider() {
         
         setLayout( new BorderLayout() );
+        
         grossuraPincel = new JSlider( JSlider.VERTICAL, 1, 10, 1 );
         grossuraPincel.setMajorTickSpacing( 1 );
         grossuraPincel.setPaintLabels( true );
         grossuraPincel.setFocusable( false );
+        grossuraPincel.setPreferredSize( new java.awt.Dimension( 35, 200 ) );       
         
-        grossuraPincel.setPreferredSize( new java.awt.Dimension( 35, 200 ) );
         JPanel painelContainer = new javax.swing.JPanel();
         painelContainer.add( grossuraPincel );
         add( painelContainer, BorderLayout.WEST );

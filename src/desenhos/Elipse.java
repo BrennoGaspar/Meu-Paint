@@ -22,8 +22,10 @@ public class Elipse extends Forma {
         Graphics2D g2d = (Graphics2D) g;
         BasicStroke traco = new BasicStroke( (float) getGrossura(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER );
         g2d.setStroke( traco );
-        g2d.setColor( corPreenchimento );
-        g2d.fillOval( iniXD, iniYD, largura, altura );
+        if( corPreenchimento != null ) {
+            g2d.setColor( corPreenchimento );
+            g2d.fillOval( iniXD, iniYD, largura, altura );
+        }
         g2d.setColor( corDoContorno );
         g2d.drawOval( iniXD, iniYD, largura, altura );
         

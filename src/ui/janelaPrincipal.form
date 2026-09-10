@@ -82,10 +82,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnBorracha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="preencher" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Component id="undo" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="redo" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="painelCorContorno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="painelCorPreenchimento" min="-2" max="-2" attributes="0"/>
@@ -107,11 +109,10 @@
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="undo" alignment="3" pref="0" max="32767" attributes="0"/>
                           <Component id="redo" alignment="3" pref="0" max="32767" attributes="0"/>
+                          <Component id="preencher" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="painelCorPreenchimento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="painelCorContorno" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="painelCorPreenchimento" alignment="0" pref="21" max="32767" attributes="0"/>
+                      <Component id="painelCorContorno" alignment="0" pref="21" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
@@ -264,7 +265,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -275,7 +276,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="undoMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="undoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="redo">
@@ -284,6 +284,14 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="redoMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="preencher">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PREENCHER"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="preencherMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
