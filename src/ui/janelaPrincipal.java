@@ -115,8 +115,6 @@ public class janelaPrincipal extends javax.swing.JFrame {
 
         btnGroupFerramentas = new javax.swing.ButtonGroup();
         painelDesenho = new ui.PainelDesenho();
-        undo = new javax.swing.JButton();
-        redo = new javax.swing.JButton();
         painelFerramentas = new javax.swing.JPanel();
         btnBorracha = new javax.swing.JToggleButton();
         btnLinha = new javax.swing.JToggleButton();
@@ -126,6 +124,8 @@ public class janelaPrincipal extends javax.swing.JFrame {
         btnElipse = new javax.swing.JToggleButton();
         painelCorPreenchimento = new javax.swing.JPanel();
         painelCorContorno = new javax.swing.JPanel();
+        undo = new javax.swing.JButton();
+        redo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Meu Paint");
@@ -144,40 +144,15 @@ public class janelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        undo.setText("undo");
-        undo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                undoMouseClicked(evt);
-            }
-        });
-        undo.addActionListener(this::undoActionPerformed);
-
-        redo.setText("redo");
-        redo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                redoMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout painelDesenhoLayout = new javax.swing.GroupLayout(painelDesenho);
         painelDesenho.setLayout(painelDesenhoLayout);
         painelDesenhoLayout.setHorizontalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDesenhoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(undo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(redo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         painelDesenhoLayout.setVerticalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDesenhoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(undo)
-                    .addComponent(redo))
-                .addContainerGap(261, Short.MAX_VALUE))
+            .addGap(0, 334, Short.MAX_VALUE)
         );
 
         btnGroupFerramentas.add(btnBorracha);
@@ -236,7 +211,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         );
         painelCorPreenchimentoLayout.setVerticalGroup(
             painelCorPreenchimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 18, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         painelCorContorno.setBackground(new java.awt.Color(0, 0, 0));
@@ -260,6 +235,21 @@ public class janelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 18, Short.MAX_VALUE)
         );
 
+        undo.setText("↩️");
+        undo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                undoMouseClicked(evt);
+            }
+        });
+        undo.addActionListener(this::undoActionPerformed);
+
+        redo.setText("↪️");
+        redo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                redoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelFerramentasLayout = new javax.swing.GroupLayout(painelFerramentas);
         painelFerramentas.setLayout(painelFerramentasLayout);
         painelFerramentasLayout.setHorizontalGroup(
@@ -277,25 +267,33 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnCaneta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorracha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         painelFerramentasLayout.setVerticalGroup(
             painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFerramentasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRetangulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnElipse, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPoligono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCaneta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBorracha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelCorContorno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 

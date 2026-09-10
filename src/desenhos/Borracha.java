@@ -16,7 +16,7 @@ public class Borracha extends Forma {
         Graphics2D g2d = (Graphics2D) g;
         BasicStroke traco = new BasicStroke( (float) getGrossura(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER );
         g2d.setStroke( traco );
-        g2d.setColor( corDoContorno );
+        g2d.setColor( Color.WHITE );
         
         if( !caminho.isEmpty() ){
             for( int i = 0; i < caminho.size() - 1; i++ ) {

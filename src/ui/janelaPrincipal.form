@@ -53,47 +53,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="undo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="redo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="undo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="redo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="261" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="334" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="undo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="undo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="undoMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="undoActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="redo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="redo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="redoMouseClicked"/>
-          </Events>
-        </Component>
-      </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="painelFerramentas">
 
@@ -113,11 +81,15 @@
                   <Component id="btnCaneta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnBorracha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="undo" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <Component id="redo" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="painelCorContorno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="painelCorPreenchimento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,15 +97,21 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnLinha" min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnRetangulo" min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnElipse" min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnPoligono" min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnCaneta" min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnBorracha" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="painelCorContorno" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="painelCorPreenchimento" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="undo" alignment="3" pref="0" max="32767" attributes="0"/>
+                          <Component id="redo" alignment="3" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="painelCorPreenchimento" alignment="0" max="32767" attributes="0"/>
+                          <Component id="painelCorContorno" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
@@ -252,7 +230,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -291,6 +269,23 @@
             </DimensionLayout>
           </Layout>
         </Container>
+        <Component class="javax.swing.JButton" name="undo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x21a9;&#xfe0f;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="undoMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="undoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="redo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x21aa;&#xfe0f;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="redoMouseClicked"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
