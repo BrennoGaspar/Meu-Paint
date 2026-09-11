@@ -17,6 +17,7 @@ public class PainelDesenho extends JPanel {
     private ResizingArrayStack pilha;
     private Forma emConstrucao;
     private JSlider grossuraPincel;
+    private Graphics g;
     
     // Criar o Slider
     private void criarSlider() {
@@ -55,6 +56,7 @@ public class PainelDesenho extends JPanel {
     @Override
     protected void paintComponent( Graphics g ) {
         
+        this.g = g;
         super.paintComponent( g );
 
         // cor da tela
@@ -71,6 +73,14 @@ public class PainelDesenho extends JPanel {
         if( emConstrucao != null ) {
             emConstrucao.desenhar( g );
         }
+        
+    }
+    
+    public void limparTela() {
+        
+        g.setColor( Color.WHITE );
+        g.fillRect( 0, 0, getWidth(), getHeight() );
+        repaint();
         
     }
     

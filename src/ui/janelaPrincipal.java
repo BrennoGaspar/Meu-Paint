@@ -116,6 +116,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         btnGroupFerramentas = new javax.swing.ButtonGroup();
         painelDesenho = new ui.PainelDesenho();
         painelFerramentas = new javax.swing.JPanel();
+        btnLimpar = new javax.swing.JButton();
         btnBorracha = new javax.swing.JToggleButton();
         btnLinha = new javax.swing.JToggleButton();
         btnCaneta = new javax.swing.JToggleButton();
@@ -153,8 +154,15 @@ public class janelaPrincipal extends javax.swing.JFrame {
         );
         painelDesenhoLayout.setVerticalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
+
+        btnLimpar.setText("Limpar Tela");
+        btnLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimparMouseClicked(evt);
+            }
+        });
 
         btnGroupFerramentas.add(btnBorracha);
         btnBorracha.setText("Borracha");
@@ -276,7 +284,9 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBorracha)
                 .addGap(18, 18, 18)
                 .addComponent(preencher)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,9 +310,10 @@ public class janelaPrincipal extends javax.swing.JFrame {
                     .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(preencher))
-                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                    .addComponent(painelCorContorno, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
+                        .addComponent(preencher)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(painelCorContorno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -429,6 +440,22 @@ public class janelaPrincipal extends javax.swing.JFrame {
         preencherB = !preencherB;
     }//GEN-LAST:event_preencherMouseClicked
 
+    private void btnLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseClicked
+        
+        int resposta = JOptionPane.showConfirmDialog( 
+            null, 
+            "Deseja realmente limpar todos os desenhos do painel?\n\nEssa ação é irreversível!", 
+            "Limpeza de painel", 
+            JOptionPane.YES_NO_OPTION 
+        );
+        
+        if( resposta == JOptionPane.YES_OPTION ) {
+            pilha.clear();
+            painelDesenho.limparTela();
+        }
+        
+    }//GEN-LAST:event_btnLimparMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -459,6 +486,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnCaneta;
     private javax.swing.JToggleButton btnElipse;
     private javax.swing.ButtonGroup btnGroupFerramentas;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JToggleButton btnLinha;
     private javax.swing.JToggleButton btnPoligono;
     private javax.swing.JToggleButton btnRetangulo;
