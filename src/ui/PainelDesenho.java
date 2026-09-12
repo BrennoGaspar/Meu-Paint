@@ -16,6 +16,7 @@ public class PainelDesenho extends JPanel {
     // Atributos
     private ResizingArrayStack pilha;
     private Forma emConstrucao;
+    private Forma preview;
     private JSlider grossuraPincel;
     
     // Criar o Slider
@@ -50,6 +51,10 @@ public class PainelDesenho extends JPanel {
     public void setFormaEmConstrucao( Forma emConstrucao ) {
         this.emConstrucao = emConstrucao;
     }
+
+    public void setPreview(Forma preview) {
+        this.preview = preview;
+    }
     
     // Função desenhar
     @Override
@@ -71,6 +76,10 @@ public class PainelDesenho extends JPanel {
         // Desenho que está sendo feito (mouseDragged)
         if( emConstrucao != null ) {
             emConstrucao.desenhar( g );
+        }
+        
+        if( preview != null ) {
+            preview.desenhar( g );
         }
         
     }

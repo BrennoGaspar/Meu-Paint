@@ -105,6 +105,24 @@ public class janelaPrincipal extends javax.swing.JFrame {
         painelDesenho.getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW ).put( ctrlY, "refazer" );
         painelDesenho.getActionMap().put( "refazer", redoAction );
     }
+    
+    private void criarPreview( java.awt.event.MouseEvent evt ) {
+        if( btnBorracha.isSelected() || btnCaneta.isSelected() ) {
+            int grossura = (int) painelDesenho.getGrossura();
+            Forma preview = new Elipse();
+            preview.setIniX( evt.getX() - (grossura / 2) );
+            preview.setIniY( evt.getY() - (grossura / 2) );
+            preview.setFimX( evt.getX() + (grossura / 2) );
+            preview.setFimY( evt.getY() + (grossura / 2) );
+            if( btnCaneta.isSelected() ) {
+                preview.setCorPreenchimento( painelCorContorno.getBackground() );
+            } else {
+                preview.setCorPreenchimento( Color.WHITE );
+            }            
+            painelDesenho.setPreview( preview );
+            painelDesenho.repaint();
+        }
+    }
             
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,6 +156,9 @@ public class janelaPrincipal extends javax.swing.JFrame {
         painelDesenho.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 painelDesenhoMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                painelDesenhoMouseMoved(evt);
             }
         });
         painelDesenho.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -373,8 +394,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
             novaForma.setCaminho( caminho );
         } else if ( btnTexto.isSelected() ) {
             Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
-            novaForma = new Texto( texto, pontoInicial );
-            
+            novaForma = new Texto( texto, pontoInicial );   
         }
         novaForma.setIniX( evt.getX() );
         novaForma.setIniY( evt.getY() );
@@ -391,6 +411,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         emConstrucao = novaForma;
         painelDesenho.setFormaEmConstrucao( emConstrucao );
         painelDesenho.repaint();
+        painelDesenho.setPreview( null );
     }//GEN-LAST:event_painelDesenhoMousePressed
 
     private void painelDesenhoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseReleased
@@ -477,13 +498,17 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private void btnTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTextoActionPerformed
         try{
             texto = JOptionPane.showInputDialog( "Frase que deseja escrever: " );
-            if( texto == null || texto.trim().isEmpty() ) {
+            if( texto.trim().isEmpty() ) {
                 JOptionPane.showMessageDialog( this, "Digite algo para desenhar", "ERRO", JOptionPane.ERROR_MESSAGE );
             }
         } catch ( HeadlessException exc ) {
             JOptionPane.showMessageDialog( this, "Erro: " + exc, "ERRO", JOptionPane.ERROR_MESSAGE );
         }
     }//GEN-LAST:event_btnTextoActionPerformed
+
+    private void painelDesenhoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseMoved
+        criarPreview( evt );
+    }//GEN-LAST:event_painelDesenhoMouseMoved
 
     /**
      * @param args the command line arguments
