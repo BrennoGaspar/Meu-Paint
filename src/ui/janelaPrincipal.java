@@ -12,7 +12,9 @@ import desenhos.Linha;
 import desenhos.Poligono;
 import desenhos.Ponto;
 import desenhos.Retangulo;
+import desenhos.Texto;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -27,7 +29,6 @@ import javax.swing.KeyStroke;
 import stack.ResizingArrayStack;
 
 /**
- *
  * @author Brenno Gaspar Pinto
  */
 public class janelaPrincipal extends javax.swing.JFrame {
@@ -37,6 +38,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     
     private Forma novaForma;
     private int quantidadeLados;
+    private String texto;
     private List<Ponto> caminho;
     private ResizingArrayStack pilha;
     private ResizingArrayStack pilhaRedo;
@@ -128,6 +130,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         undo = new javax.swing.JButton();
         redo = new javax.swing.JButton();
         preencher = new javax.swing.JCheckBox();
+        btnTexto = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Meu Paint");
@@ -154,7 +157,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         );
         painelDesenhoLayout.setVerticalGroup(
             painelDesenhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 503, Short.MAX_VALUE)
         );
 
         btnLimpar.setText("Limpar Tela");
@@ -265,6 +268,13 @@ public class janelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGroupFerramentas.add(btnTexto);
+        btnTexto.setText("Texto");
+        btnTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTexto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTexto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTexto.addActionListener(this::btnTextoActionPerformed);
+
         javax.swing.GroupLayout painelFerramentasLayout = new javax.swing.GroupLayout(painelFerramentas);
         painelFerramentas.setLayout(painelFerramentasLayout);
         painelFerramentasLayout.setHorizontalGroup(
@@ -272,13 +282,15 @@ public class janelaPrincipal extends javax.swing.JFrame {
             .addGroup(painelFerramentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnLinha)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRetangulo)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnElipse)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPoligono)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTexto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCaneta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBorracha)
@@ -286,7 +298,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addComponent(preencher)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,26 +306,28 @@ public class janelaPrincipal extends javax.swing.JFrame {
                 .addComponent(painelCorContorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelFerramentasLayout.setVerticalGroup(
             painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFerramentasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRetangulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnElipse, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPoligono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCaneta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBorracha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(undo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(redo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(preencher)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                    .addComponent(painelCorContorno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRetangulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnElipse, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPoligono, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCaneta, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBorracha, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(painelFerramentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(undo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(redo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(preencher)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(painelCorPreenchimento, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                        .addComponent(painelCorContorno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -350,13 +364,17 @@ public class janelaPrincipal extends javax.swing.JFrame {
             Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
             caminho = new ArrayList<>();
             caminho.add(pontoInicial);
-            novaForma.setCaminho(caminho);
+            novaForma.setCaminho( caminho );
         } else if ( btnBorracha.isSelected() ) {
             novaForma = new Borracha();
             Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
             caminho = new ArrayList<>();
             caminho.add(pontoInicial);
-            novaForma.setCaminho(caminho);
+            novaForma.setCaminho( caminho );
+        } else if ( btnTexto.isSelected() ) {
+            Ponto pontoInicial = new Ponto ( evt.getX(), evt.getY() );
+            novaForma = new Texto( texto, pontoInicial );
+            
         }
         novaForma.setIniX( evt.getX() );
         novaForma.setIniY( evt.getY() );
@@ -451,10 +469,21 @@ public class janelaPrincipal extends javax.swing.JFrame {
         
         if( resposta == JOptionPane.YES_OPTION ) {
             pilha.clear();
-            painelDesenho.limparTela();
+            painelDesenho.repaint();
         }
         
     }//GEN-LAST:event_btnLimparMouseClicked
+
+    private void btnTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTextoActionPerformed
+        try{
+            texto = JOptionPane.showInputDialog( "Frase que deseja escrever: " );
+            if( texto == null || texto.trim().isEmpty() ) {
+                JOptionPane.showMessageDialog( this, "Digite algo para desenhar", "ERRO", JOptionPane.ERROR_MESSAGE );
+            }
+        } catch ( HeadlessException exc ) {
+            JOptionPane.showMessageDialog( this, "Erro: " + exc, "ERRO", JOptionPane.ERROR_MESSAGE );
+        }
+    }//GEN-LAST:event_btnTextoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,6 +519,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnLinha;
     private javax.swing.JToggleButton btnPoligono;
     private javax.swing.JToggleButton btnRetangulo;
+    private javax.swing.JToggleButton btnTexto;
     private javax.swing.JPanel painelCorContorno;
     private javax.swing.JPanel painelCorPreenchimento;
     private ui.PainelDesenho painelDesenho;

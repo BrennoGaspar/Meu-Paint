@@ -58,7 +58,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="455" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="503" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -71,13 +71,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnLinha" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnRetangulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnElipse" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPoligono" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnTexto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnCaneta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnBorracha" min="-2" max="-2" attributes="0"/>
@@ -85,7 +87,7 @@
                   <Component id="preencher" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="undo" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="redo" min="-2" pref="40" max="-2" attributes="0"/>
@@ -93,29 +95,32 @@
                   <Component id="painelCorContorno" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="painelCorPreenchimento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnLinha" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnRetangulo" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnElipse" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnPoligono" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnCaneta" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="btnBorracha" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="undo" alignment="3" pref="0" max="32767" attributes="0"/>
-                          <Component id="redo" alignment="3" pref="0" max="32767" attributes="0"/>
-                          <Component id="preencher" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnLimpar" alignment="3" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnTexto" min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnLinha" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnRetangulo" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnElipse" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnPoligono" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnCaneta" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="btnBorracha" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="undo" alignment="3" max="32767" attributes="0"/>
+                              <Component id="redo" alignment="3" max="32767" attributes="0"/>
+                              <Component id="preencher" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLimpar" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="painelCorPreenchimento" alignment="0" pref="23" max="32767" attributes="0"/>
+                          <Component id="painelCorContorno" alignment="1" pref="23" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="painelCorPreenchimento" alignment="0" pref="23" max="32767" attributes="0"/>
-                      <Component id="painelCorContorno" alignment="1" pref="23" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
@@ -303,6 +308,22 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="preencherMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="btnTexto">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btnGroupFerramentas"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Texto"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTextoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
