@@ -426,6 +426,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
         emConstrucao = null;
         painelDesenho.setFormaEmConstrucao( emConstrucao );
         painelDesenho.repaint();
+        pilhaRedo.clear();
     }//GEN-LAST:event_painelDesenhoMouseReleased
 
     private void painelDesenhoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_painelDesenhoMouseDragged
