@@ -305,7 +305,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="preencher">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PREENCHER"/>
+            <Property name="text" type="java.lang.String" value="Preencher"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="preencherMouseClicked"/>

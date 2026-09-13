@@ -282,7 +282,7 @@ public class janelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        preencher.setText("PREENCHER");
+        preencher.setText("Preencher");
         preencher.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 preencherMouseClicked(evt);
